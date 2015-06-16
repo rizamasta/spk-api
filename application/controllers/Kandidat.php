@@ -56,6 +56,30 @@ class Kandidat extends CI_Controller{
 
         echo json_encode($result);
     }
+    public function view(){
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            if($_POST['action']!="")
+            {
+                $action=$_POST['action'];
+                $sql    ="SELECT * FROM tbl_kandidat WHERE tbl_kandidat.action='$action'";
+                $query  =$this->db->query($sql);
+                if($query){
+                    $result['message']='success';
+                    $result['data']   = $query->result();
+                }
+                else{
+                    $result['message']='Failed query';
+                }
+            }
+            else{
+                $result['message']='Invalid Request';
+            }
+        }
+        else{
+            $result['message']='Method not allowed!';
+        }
+        echo json_encode($result);
+    }
 
 
 }
