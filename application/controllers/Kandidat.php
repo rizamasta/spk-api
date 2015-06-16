@@ -5,7 +5,7 @@
  * Date: 6/9/15
  * Time: 9:09 PM
  */
-
+ 
 class Kandidat extends CI_Controller{
     public function __construct(){
         parent :: __construct();
