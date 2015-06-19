@@ -33,7 +33,7 @@ class Kandidat extends CI_Controller{
                 $alamat     = $_POST['alamat'];
                 $keg_mhs    = $_POST['keg_mhs'];
                 $prestasi   = $_POST['prestasi'];
-                $status     = 0;
+                $status     = 'NEW';
                 $action     = 0;
 
                 $sql        ="INSERT INTO tbl_kandidat
@@ -58,10 +58,9 @@ class Kandidat extends CI_Controller{
     }
     public function view(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
-            if($_POST['action']!="")
-            {
-                $action=$_POST['action'];
-                $sql    ="SELECT * FROM tbl_kandidat WHERE tbl_kandidat.action='$action'";
+
+                $sql    ="SELECT * FROM tbl_kandidat";
+                !empty($_POST['action'])?$sql.=" WHERE tbl_kandidat.action='".$_POST['action']."'":$sql .=" ";
                 $query  =$this->db->query($sql);
                 if($query){
                     $result['message']='success';
@@ -70,10 +69,7 @@ class Kandidat extends CI_Controller{
                 else{
                     $result['message']='Failed query';
                 }
-            }
-            else{
-                $result['message']='Invalid Request';
-            }
+
         }
         else{
             $result['message']='Method not allowed!';

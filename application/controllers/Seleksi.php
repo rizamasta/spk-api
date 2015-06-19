@@ -15,7 +15,21 @@ class Seleksi extends CI_Controller{
         echo json_encode($result);
     }
     public function proses(){
-        $result['message']="success";
+        if(!empty($_POST['semester']) && !empty($_POST['quota'])) {
+            $sql    ="SELECT * FROM tbl_kandidat where status='NEW' AND tbl_kandidat.action='0'";
+            $query  = $this->db->query($sql);
+            if($query){
+                $result['message'] = "success";
+                $kandidat = $query->result();
+            }
+            else{
+                $result['message'] = "Failed to process data!";
+            }
+
+        }
+        else{
+            $result['message'] = "Invalid Request";
+        }
         echo json_encode($result);
     }
 
