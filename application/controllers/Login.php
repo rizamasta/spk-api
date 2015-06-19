@@ -28,10 +28,9 @@ class Login extends CI_Controller {
             $result['message']  = 'success';
             $username           = $_POST['username'];
             $password           = sha1($_POST['password']);
-            $sql                = "SELECT user_name,real_name,email FROM tbl_user
-                                                                   WHERE (user_name = '$username' OR email = '$username')
-                                                                   AND password = '$password'
-                                                                   AND status_user   ='1'";
+            $sql                = "SELECT username,tbl_user.name as nama,email FROM tbl_user
+                                                                   WHERE (username = '$username' OR email = '$username')
+                                                                   AND password = '$password'";
             $query  = $this->db->query($sql);
             if($query)
             {
@@ -57,7 +56,7 @@ class Login extends CI_Controller {
         echo json_encode($result);
        // print_r($result);
     }
-    public function change(){
+    /*public function change(){
         if($_SERVER['REQUEST_METHOD']==='POST'){
 
             $result['message']  = 'success';
@@ -124,6 +123,6 @@ class Login extends CI_Controller {
 
         }
         echo json_encode($result);
-    }
+    }*/
 
 }
