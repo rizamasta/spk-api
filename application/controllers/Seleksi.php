@@ -60,7 +60,7 @@ class Seleksi extends CI_Controller{
                                                                       '".$id_periode."')";
                     $this->db->query($sql_hasil);
                 };
-                //penentuan hasil
+                //penentuan hasil diterima
                 $sql_eksekusi   = "SELECT tbl_kandidat.* FROM tbl_kandidat,tbl_hasil WHERE
                                     tbl_kandidat.id_kandidat = tbl_hasil.id_kandidat AND
                                     tbl_kandidat.status      = 'NEW' AND
@@ -69,6 +69,17 @@ class Seleksi extends CI_Controller{
                 $hasil_eksekusi = $query_eksekusi->result();
                 foreach($hasil_eksekusi as $row){
                     $sql_up     = "UPDATE tbl_kandidat SET status='ACCEPTED',tbl_kandidat.action='2' WHERE tbl_kandidat.id_kandidat='".$row->id_kandidat."'";
+                    $this->db->query($sql_up);
+                }
+                //penentuan hasil ditolak
+                $sql_eksekusi   = "SELECT tbl_kandidat.* FROM tbl_kandidat,tbl_hasil WHERE
+                                    tbl_kandidat.id_kandidat = tbl_hasil.id_kandidat AND
+                                    tbl_kandidat.status      = 'NEW' AND
+                                    tbl_kandidat.action      = '0'";
+                $query_eksekusi = $this->db->query($sql_eksekusi);
+                $hasil_eksekusi = $query_eksekusi->result();
+                foreach($hasil_eksekusi as $row){
+                    $sql_up     = "UPDATE tbl_kandidat SET status='NA',tbl_kandidat.action='2' WHERE tbl_kandidat.id_kandidat='".$row->id_kandidat."'";
                     $this->db->query($sql_up);
                 }
             }
