@@ -33,11 +33,11 @@ class Seleksi extends CI_Controller{
             $create_by      = $_POST['username'];
 
             $_POST['semester']==='genap'?$smst=0:$smst=1;
-            $sql_periode    = "INSERT INTO tbl_periode VALUES ('$id_periode','$nama_periode','$tgl_periode','$create_by')";
-            $this->db->query($sql_periode);
             $sql            ="SELECT * FROM tbl_kandidat where status='NEW' AND tbl_kandidat.action='0'";
             $query          = $this->db->query($sql);
-            if($query){
+            if($query->num_rows()>0){
+                $sql_periode    = "INSERT INTO tbl_periode VALUES ('$id_periode','$nama_periode','$tgl_periode','$create_by')";
+                $this->db->query($sql_periode);
                 $result['message'] = "success";
                 $kandidat = $query->result();
                 $x=0;
