@@ -5,7 +5,17 @@
  * Date: 6/9/15
  * Time: 9:09 PM
  */
- 
+
+if(!empty($_SERVER['HTTP_ORIGIN']))
+{
+    $http_origin = $_SERVER['HTTP_ORIGIN'];
+}
+else{
+    $http_origin = '*';
+}
+header("Access-Control-Allow-Origin:$http_origin");
+header("Access-Control-Allow-Credentials:true");
+defined('BASEPATH') OR exit('No script Allowed');
 class Kandidat extends CI_Controller{
     public function __construct(){
         parent :: __construct();

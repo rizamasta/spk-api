@@ -14,7 +14,6 @@ else{
 }
 header("Access-Control-Allow-Origin:$http_origin");
 header("Access-Control-Allow-Credentials:true");
-
 defined('BASEPATH') OR exit('No script Allowed');
 
 class Login extends CI_Controller {

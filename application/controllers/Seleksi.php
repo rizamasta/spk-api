@@ -5,6 +5,17 @@
  * Date: 6/16/15
  * Time: 9:37 PM
  */
+if(!empty($_SERVER['HTTP_ORIGIN']))
+{
+    $http_origin = $_SERVER['HTTP_ORIGIN'];
+}
+else{
+    $http_origin = '*';
+}
+header("Access-Control-Allow-Origin:$http_origin");
+header("Access-Control-Allow-Credentials:true");
+defined('BASEPATH') OR exit('No script Allowed');
+
 class Seleksi extends CI_Controller{
     public function __construct(){
         parent ::__construct();
