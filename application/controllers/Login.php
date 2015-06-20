@@ -54,7 +54,7 @@ class Login extends CI_Controller {
 
         }
         echo json_encode($result);
-       // print_r($result);
+
     }
     /*public function change(){
         if($_SERVER['REQUEST_METHOD']==='POST'){
